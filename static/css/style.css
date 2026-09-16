@@ -424,7 +424,8 @@ h1, h2, h3 { margin: 0; }
   margin-top: -6px;
 }
 .folder-icon {
-  width: 32px;
+  width: 44px;
+  rotate: -8deg;
 }
 .section-subheading p {
   font-family: var(--font-mono);
