@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Developer Portfolio — The Claudia Studio</title>
+<meta name="description" content="Developer Portfolio — a project by Claudia. Visual Design work." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,600&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<div class="grid-bg" aria-hidden="true"></div>
+
+<header class="site-header">
+  <a href="index.html" class="logo" aria-label="The Claudia Studio — home">
+    <img class="logo-mark" src="assets/images/logo.svg" alt="The Claudia Studio" />
+  </a>
+
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="primaryNav">
+    <span></span><span></span><span></span>
+  </button>
+
+  <nav class="primary-nav" id="primaryNav">
+    <a href="index.html#home">Home</a>
+    <a href="work.html">Work</a>
+    <a href="index.html#art-work">My Art Work</a>
+    <a href="store.html">Store</a>
+    <a href="bio.html">Bio</a>
+    <a href="index.html#contact">Contact</a>
+  </nav>
+</header>
+
+<main>
+
+  <article class="project-detail">
+
+    <a href="work.html" class="project-detail__back">&larr; Back to Work</a>
+
+    <div class="project-detail__header">
+      <h1 class="project-detail__title">Developer Portfolio</h1>
+      <div class="project-detail__tags">
+              <span class="pill pill--pink">Visual Design</span>
+              <span class="pill pill--olive">User Experience</span>
+      </div>
+    </div>
+
+    <img class="project-detail__cover" src="assets/images/projects/developer-portfolio.png" alt="Developer Portfolio project cover" />
+
+    <blockquote class="project-detail__quote">
+      &ldquo;Design creates culture. Culture shapes values. Values determine the future.&rdquo;
+      <cite>&ndash; Robert L. Peters</cite>
+    </blockquote>
+
+    <div class="project-detail__section">
+      <h2>Overview</h2>
+      <div class="copy-placeholder">
+        [Add a short project overview here — the brief, the client, and what
+        you were asked to deliver for Developer Portfolio.]
+      </div>
+    </div>
+
+    <div class="project-detail__section">
+      <h2>Process</h2>
+      <div class="copy-placeholder">
+        [Add a paragraph or two on your process — research, sketches,
+        iterations, what problems came up and how you solved them.]
+      </div>
+    </div>
+
+    <div class="project-detail__gallery">
+      <div class="img-placeholder" data-asset="developer-portfolio-gallery-1.jpg"><span>more visuals</span></div>
+      <div class="img-placeholder" data-asset="developer-portfolio-gallery-2.jpg"><span>more visuals</span></div>
+    </div>
+
+    <nav class="project-nav" aria-label="Other projects">
+      <a href="project-eden.html">
+        <span class="project-nav__label">&larr; Previous</span>
+        <span>Eden</span>
+      </a>
+      <a href="project-arteo-studio.html" class="project-nav__next">
+        <span class="project-nav__label">Next &rarr;</span>
+        <span>Arteo studio</span>
+      </a>
+    </nav>
+
+  </article>
+
+</main>
+
+<footer class="site-footer" id="contact">
+  <a href="index.html" class="logo logo--footer" aria-label="The Claudia Studio — home">
+    <img class="logo-mark" src="assets/images/logo.svg" alt="The Claudia Studio" />
+  </a>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

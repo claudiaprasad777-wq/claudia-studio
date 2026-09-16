@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bio — The Claudia Studio</title>
+<meta name="description" content="A little about Claudia — UI designer, illustrator, artist, and creative person." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,600&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<div class="grid-bg" aria-hidden="true"></div>
+
+<header class="site-header">
+  <a href="index.html" class="logo" aria-label="The Claudia Studio — home">
+    <img class="logo-mark" src="assets/images/logo.svg" alt="The Claudia Studio" />
+  </a>
+
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="primaryNav">
+    <span></span><span></span><span></span>
+  </button>
+
+  <nav class="primary-nav" id="primaryNav">
+    <a href="index.html#home">Home</a>
+    <a href="work.html">Work</a>
+    <a href="index.html#art-work">My Art Work</a>
+    <a href="store.html">Store</a>
+    <a href="bio.html">Bio</a>
+    <a href="index.html#contact">Contact</a>
+  </nav>
+</header>
+
+<main>
+
+  <section class="bio">
+
+    <div class="bio-columns">
+
+      <div class="bio-note-stack">
+        <div class="bio-note-sheet bio-note-sheet--back" aria-hidden="true"></div>
+        <div class="bio-note-sheet bio-note-sheet--front">
+          <div class="bio-text">
+            <p class="bio-hola">holaaaaaa...</p>
+            <p class="bio-intro">i&rsquo;m Claudia&mdash;</p>
+
+            <div class="bio-tags">
+              <span class="pill pill--pink">UI Designer</span>
+              <span class="pill pill--olive">illustrator</span>
+              <span class="pill pill--gray">Artist</span>
+              <span class="pill pill--pink">Creative person</span>
+            </div>
+
+            <p>
+              I&rsquo;m Claudia, and I wholeheartedly embrace the beauty of
+              complexity. Just like you, I refuse to be limited by a single
+              definition. Instead, I thrive in the realm of possibilities.
+              Within the tapestry of my being, I resonate with multiple roles
+              that fuel my diverse and ever-evolving identity. As a believer,
+              I find solace in faith and the wonders of the universe.
+            </p>
+
+            <p>
+              As an artist, I express my innermost thoughts and emotions
+              through various mediums, inviting others to join me on a
+              journey of self-discovery. As a creator, I revel in the
+              process of bringing ideas to life, shaping tangible
+              manifestations of my imagination. And as a UI designer, I
+              combine aesthetics and functionality to craft seamless and
+              user-friendly experiences in the digital realm.
+            </p>
+
+            <p>
+              Together, these facets weave a vibrant mosaic that is uniquely
+              me.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bio-drawing">
+        <img src="assets/images/bio-portrait.png" alt="Hand-drawn illustration of a polaroid photo of Claudia wearing sunglasses, with a caption reading &quot;Hello!&quot;" />
+        <span class="bio-drawing-cover" aria-hidden="true"></span>
+      </div>
+
+    </div>
+
+    <p class="bio-cta">
+      Take a peek at my <a href="work.html">work</a>, or
+      <a href="index.html#contact">get in touch</a> if you'd like to work together.
+    </p>
+
+  </section>
+
+</main>
+
+<footer class="site-footer" id="contact">
+  <a href="index.html" class="logo logo--footer" aria-label="The Claudia Studio — home">
+    <img class="logo-mark" src="assets/images/logo.svg" alt="The Claudia Studio" />
+  </a>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
