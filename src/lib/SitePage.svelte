@@ -20,38 +20,51 @@
     primaryNav?.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeNav));
 
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const hero = document.querySelector('.hero');
-    const parallaxItems = document.querySelectorAll('.hero-tags .tag, .hero-prop, .hero-badges');
     const wideScreen = window.matchMedia('(min-width: 861px)');
-    let lastEvent;
-    let ticking = false;
-    const applyParallax = () => {
-      ticking = false;
-      if (!lastEvent || !wideScreen.matches || !hero) return;
-      const bounds = hero.getBoundingClientRect();
-      const x = ((lastEvent.clientX - bounds.left) / bounds.width) * 2 - 1;
-      const y = ((lastEvent.clientY - bounds.top) / bounds.height) * 2 - 1;
-      parallaxItems.forEach((element) => {
-        const depth = Number.parseFloat(element.dataset.depth) || 1;
-        element.style.setProperty('--tx', `${x * 16 * depth}px`);
-        element.style.setProperty('--ty', `${y * 16 * depth}px`);
+
+    const setupParallax = (container, items) => {
+      if (!container || !items.length || reducedMotion.matches) return () => {};
+      let lastEvent;
+      let ticking = false;
+      const applyParallax = () => {
+        ticking = false;
+        if (!lastEvent || !wideScreen.matches) return;
+        const bounds = container.getBoundingClientRect();
+        const x = ((lastEvent.clientX - bounds.left) / bounds.width) * 2 - 1;
+        const y = ((lastEvent.clientY - bounds.top) / bounds.height) * 2 - 1;
+        items.forEach((element) => {
+          const depth = Number.parseFloat(element.dataset.depth) || 1;
+          element.style.setProperty('--tx', `${x * 16 * depth}px`);
+          element.style.setProperty('--ty', `${y * 16 * depth}px`);
+        });
+      };
+      const resetParallax = () => items.forEach((element) => {
+        element.style.setProperty('--tx', '0px');
+        element.style.setProperty('--ty', '0px');
       });
+      const trackPointer = (event) => {
+        lastEvent = event;
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(applyParallax);
+        }
+      };
+      container.addEventListener('mousemove', trackPointer);
+      container.addEventListener('mouseleave', resetParallax);
+      return () => {
+        container.removeEventListener('mousemove', trackPointer);
+        container.removeEventListener('mouseleave', resetParallax);
+      };
     };
-    const resetParallax = () => parallaxItems.forEach((element) => {
-      element.style.setProperty('--tx', '0px');
-      element.style.setProperty('--ty', '0px');
-    });
-    const trackPointer = (event) => {
-      lastEvent = event;
-      if (!ticking) {
-        ticking = true;
-        requestAnimationFrame(applyParallax);
-      }
-    };
-    if (hero && parallaxItems.length && !reducedMotion.matches) {
-      hero.addEventListener('mousemove', trackPointer);
-      hero.addEventListener('mouseleave', resetParallax);
-    }
+
+    const teardownHeroParallax = setupParallax(
+      document.querySelector('.hero'),
+      document.querySelectorAll('.hero-tags .tag, .hero-prop, .hero-badges')
+    );
+    const teardownBioParallax = setupParallax(
+      document.querySelector('.bio'),
+      document.querySelectorAll('.bio-prop')
+    );
 
     const cards = document.querySelectorAll('.projects:not(.work-archive) .project-list .project-card');
     let observer;
@@ -84,8 +97,8 @@
 
     return () => {
       navToggle?.removeEventListener('click', toggleNav);
-      hero?.removeEventListener('mousemove', trackPointer);
-      hero?.removeEventListener('mouseleave', resetParallax);
+      teardownHeroParallax();
+      teardownBioParallax();
       observer?.disconnect();
       businessCards.forEach((card) => {
         card.removeEventListener('click', flipCard);
