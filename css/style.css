@@ -862,13 +862,27 @@ h1, h2, h3 { margin: 0; }
 .bio-cta a { text-decoration: underline; text-underline-offset: 3px; }
 .bio-cta a:hover { color: var(--pink-ink); }
 
-.bio-drawing {
+.bio-drawing-wrap {
   position: relative;
   flex: 1 1 260px;
   max-width: 300px;
   margin: 0 auto;
+}
+.bio-drawing {
+  position: relative;
   rotate: 4deg;
 }
+.bio-prop {
+  position: absolute;
+  width: 100px;
+  height: auto;
+  filter: drop-shadow(0 8px 14px rgba(20, 20, 20, 0.18));
+  pointer-events: none;
+}
+.bio-prop--record-player { left: -18%; top: -12%; width: 42%; rotate: -13deg; }
+.bio-prop--plant { right: -16%; top: -6%; width: 30%; rotate: 10deg; }
+.bio-prop--palette { left: -14%; bottom: 4%; width: 26%; rotate: 15deg; }
+.bio-prop--camera { right: -18%; bottom: -8%; width: 36%; rotate: -9deg; }
 /* the "Hello!" caption is baked into the illustration, on the polaroid's
    black bottom border — cover it with a matching black strip and fade
    that cover out on hover to "reveal" the greeting */
@@ -896,7 +910,11 @@ h1, h2, h3 { margin: 0; }
 @media (max-width: 860px) {
   .bio { padding-top: 110px; text-align: left; }
   .bio-columns { flex-direction: column-reverse; gap: 30px; }
-  .bio-drawing { max-width: 260px; }
+  .bio-drawing-wrap { max-width: 260px; }
+  .bio-prop--record-player { left: -10%; top: -8%; }
+  .bio-prop--plant { right: -8%; top: -4%; }
+  .bio-prop--palette { left: -6%; bottom: 6%; }
+  .bio-prop--camera { right: -10%; bottom: -4%; }
   .bio-note-stack { max-width: 92vw; margin: 0 auto; }
   .bio-note-sheet--front { rotate: -0.6deg; padding: 44px 26px 32px; }
   .bio-note-sheet--back { translate: -8px -6px; }
