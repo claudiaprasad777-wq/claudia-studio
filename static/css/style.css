@@ -14,6 +14,8 @@
   --olive-ink: #6b6f2f;
   --gray: #e3e3e3;
   --gray-ink: #55565a;
+  --blue: #d3e4f0;
+  --blue-ink: #2f6280;
   --shadow-soft: 0 6px 16px rgba(20, 20, 20, 0.12);
   --shadow-card: 0 14px 30px rgba(20, 20, 20, 0.08);
   --radius-card: 14px;
@@ -596,33 +598,64 @@ h1, h2, h3 { margin: 0; }
   grid-template-columns: repeat(4, 1fr);
   gap: 26px;
 }
+/* each tile reads as a little manila folder: a tab poking up from the
+   top-left carries the project name, and the logo thumbnail sits inside
+   as a tilted photo tucked into the folder, straightening on hover as if
+   being pulled out for a peek */
 .logo-tile {
+  position: relative;
   display: block;
-  background: #fff;
-  border-radius: 12px;
-  padding: 16px;
+  padding: 30px 16px 16px;
+  border-radius: 4px 16px 16px 16px;
   box-shadow: var(--shadow-soft);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease;
 }
+.logo-tile--pink { --tile-bg: var(--pink); }
+.logo-tile--olive { --tile-bg: var(--olive); }
+.logo-tile--gray { --tile-bg: var(--gray); }
+.logo-tile--blue { --tile-bg: var(--blue); }
+.logo-tile { background: var(--tile-bg); }
+
 .logo-tile:hover {
-  transform: translateY(-4px) rotate(-1deg);
+  transform: translateY(-6px);
   box-shadow: var(--shadow-card);
 }
-.logo-tile__image,
-.logo-tile img {
+
+.logo-tile__tab {
+  position: absolute;
+  top: -14px;
+  left: 16px;
+  max-width: calc(100% - 32px);
+  padding: 5px 14px 8px;
+  border-radius: 8px 8px 0 0;
+  background: var(--tile-bg);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.72rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.logo-tile__photo {
+  display: block;
+  background: #fff;
+  padding: 8px 8px 20px;
+  border-radius: 6px;
+  box-shadow: 0 10px 20px rgba(20, 20, 20, 0.18);
+  rotate: -2deg;
+  transition: rotate 0.25s ease;
+}
+.logo-tile:nth-child(even) .logo-tile__photo { rotate: 2deg; }
+.logo-tile:hover .logo-tile__photo { rotate: 0deg; }
+
+.logo-tile__photo img {
   display: block;
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: 12px;
+  border-radius: 3px;
   font-size: 0.65rem;
-}
-.logo-tile span {
-  display: block;
-  font-family: var(--font-mono);
-  font-weight: 700;
-  font-size: 0.78rem;
 }
 
 @media (max-width: 860px) {
