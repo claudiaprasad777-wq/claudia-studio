@@ -701,8 +701,12 @@ h1, h2, h3 { margin: 0; }
 }
 
 .art-instagram {
-  max-width: 540px;
+  max-width: 1160px;
   margin: 40px auto 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(326px, 1fr));
+  gap: 24px;
+  align-items: start;
 }
 .art-instagram .instagram-media {
   margin-left: auto !important;
