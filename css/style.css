@@ -700,6 +700,15 @@ h1, h2, h3 { margin: 0; }
   .art-grid__item--tall { grid-row: span 1; }
 }
 
+.art-instagram {
+  max-width: 540px;
+  margin: 40px auto 0;
+}
+.art-instagram .instagram-media {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
 /* ==========================================================================
    Contact
    ========================================================================== */

@@ -106,6 +106,31 @@
       });
     };
   });
+
+  // instagram's own embed.js only scans+renders .instagram-media blockquotes
+  // that exist in the DOM when it runs; since raw <script> tags inside
+  // {@html} content never execute, load it ourselves and call
+  // window.instgrm.Embeds.process() whenever a page with an embed mounts —
+  // re-reading content.html keeps this reactive across client-side nav too.
+  $effect(() => {
+    if (typeof document === 'undefined' || !content.html.includes('instagram-media')) return;
+
+    const process = () => window.instgrm?.Embeds?.process();
+    if (window.instgrm) {
+      process();
+      return;
+    }
+
+    let script = document.getElementById('instagram-embed-script');
+    if (!script) {
+      script = document.createElement('script');
+      script.id = 'instagram-embed-script';
+      script.src = 'https://www.instagram.com/embed.js';
+      script.async = true;
+      document.body.appendChild(script);
+    }
+    script.addEventListener('load', process, { once: true });
+  });
 </script>
 
 <svelte:head>
