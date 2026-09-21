@@ -1219,6 +1219,13 @@ h1, h2, h3 { margin: 0; }
   font-size: 1.4rem;
   margin-bottom: 18px;
 }
+.project-detail__copy {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  line-height: 1.85;
+}
+.project-detail__copy p { margin: 0 0 20px; }
+.project-detail__copy p:last-child { margin-bottom: 0; }
 
 /* text placeholder for copy the client hasn't supplied yet — same dashed
    language as .img-placeholder, so unfinished content reads consistently
