@@ -1176,10 +1176,19 @@ h1, h2, h3 { margin: 0; }
 }
 .project-detail__tags {
   display: flex;
+  align-items: center;
   gap: 8px;
   flex-wrap: wrap;
   padding-top: 14px;
 }
+.project-detail__live {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.project-detail__live:hover { color: var(--pink-ink); }
 
 .project-detail__cover {
   width: 100%;
