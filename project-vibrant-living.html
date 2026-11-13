@@ -26,7 +26,7 @@
   <nav class="primary-nav" id="primaryNav">
     <a href="index.html#home">Home</a>
     <a href="work.html">Work</a>
-    <a href="index.html#art-work">My Art Work</a>
+    <a href="art.html">My Art Work</a>
     <a href="store.html">Store</a>
     <a href="bio.html">Bio</a>
     <a href="index.html#contact">Contact</a>
@@ -35,44 +35,109 @@
 
 <main>
 
-  <article class="project-detail">
+  <article class="case">
 
     <a href="work.html" class="project-detail__back">&larr; Back to Work</a>
 
-    <div class="project-detail__header">
-      <h1 class="project-detail__title">Vibrant living</h1>
-      <div class="project-detail__tags">
+    <header class="case-hero">
+      <p class="case-eyebrow">
+        <span class="ph-inline">[Project genre]</span>
+        <span class="case-eyebrow__slash" aria-hidden="true">/</span>
+        <span class="ph-inline">[Business / industry]</span>
+      </p>
+      <h1 class="case-title">Vibrant living</h1>
+      <div class="case-description">
+        <div class="copy-placeholder">[Two or three sentences: what Vibrant living is, who it's for, and what you designed.]</div>
+      </div>
+      <div class="project-detail__tags case-tags">
               <span class="pill pill--pink">Visual Design</span>
               <span class="pill pill--olive">User Experience</span>
       </div>
-    </div>
+      <dl class="case-meta">
+        <div><dt>Role</dt><dd><span class="ph-inline">[your role]</span></dd></div>
+        <div><dt>Timeline</dt><dd><span class="ph-inline">[e.g. 6 weeks]</span></dd></div>
+        <div><dt>Tools</dt><dd><span class="ph-inline">[Figma, …]</span></dd></div>
+        <div><dt>Team</dt><dd><span class="ph-inline">[who you worked with]</span></dd></div>
+      </dl>
+    </header>
 
-    <img class="project-detail__cover" src="assets/images/projects/vibrant-living.jpg" alt="Vibrant living project cover" />
+    <img class="project-detail__cover case-cover" src="assets/images/projects/vibrant-living.jpg" alt="Vibrant living project cover" />
 
     <blockquote class="project-detail__quote">
       &ldquo;Design creates culture. Culture shapes values. Values determine the future.&rdquo;
       <cite>&ndash; Robert L. Peters</cite>
     </blockquote>
 
-    <div class="project-detail__section">
-      <h2>Overview</h2>
-      <div class="copy-placeholder">
-        [Add a short project overview here — the brief, the client, and what
-        you were asked to deliver for Vibrant living.]
-      </div>
-    </div>
+    <div class="case-body">
+      <nav class="case-toc" aria-label="On this page">
+        <ol>
+        <li><a href="#problem"><span class="case-toc__num">01</span>Problem</a></li>
+        <li><a href="#research"><span class="case-toc__num">02</span>Research</a></li>
+        <li><a href="#exploration"><span class="case-toc__num">03</span>Exploration</a></li>
+        <li><a href="#outcome"><span class="case-toc__num">04</span>Outcome</a></li>
+        <li><a href="#reflection"><span class="case-toc__num">05</span>Reflection</a></li>
+        </ol>
+      </nav>
 
-    <div class="project-detail__section">
-      <h2>Process</h2>
-      <div class="copy-placeholder">
-        [Add a paragraph or two on your process — research, sketches,
-        iterations, what problems came up and how you solved them.]
+      <div class="case-steps">
+      <section class="case-step" id="problem">
+        <div class="case-step__label">
+          <span class="case-step__num">01</span>
+          <h2>Problem</h2>
+        </div>
+        <div class="case-step__body">
+          <div class="copy-placeholder">[What was broken, missing or needed? Who was affected, and what did the client or brief ask for?]</div>
+        </div>
+      </section>
+      <section class="case-step" id="research">
+        <div class="case-step__label">
+          <span class="case-step__num">02</span>
+          <h2>Research</h2>
+        </div>
+        <div class="case-step__body">
+          <div class="copy-placeholder">[How did you learn about the users and the space? Interviews, competitor audits, moodboards, data — and the key insights you found.]</div>
+          <div class="img-placeholder case-media" style="aspect-ratio:16 / 9" data-asset="vibrant-living-research.jpg"><span>research visual</span></div>
+        </div>
+      </section>
+      <section class="case-step" id="exploration">
+        <div class="case-step__label">
+          <span class="case-step__num">03</span>
+          <h2>Exploration</h2>
+        </div>
+        <div class="case-step__body">
+          <div class="copy-placeholder">[Sketches, wireframes, directions you tried and dropped. Why did the chosen direction win?]</div>
+          <div class="img-placeholder case-media" style="aspect-ratio:16 / 9" data-asset="vibrant-living-exploration.jpg"><span>exploration visual</span></div>
+        </div>
+      </section>
+      <section class="case-step" id="outcome">
+        <div class="case-step__label">
+          <span class="case-step__num">04</span>
+          <h2>Outcome</h2>
+        </div>
+        <div class="case-step__body">
+          <div class="copy-placeholder">[The final design. What shipped, and what changed because of it (results, feedback, numbers)?]</div>
+          <div class="img-placeholder case-media" style="aspect-ratio:16 / 9" data-asset="vibrant-living-outcome.jpg"><span>outcome visual</span></div>
+          <div class="case-media-pair"><div class="img-placeholder case-media" style="aspect-ratio:4 / 3" data-asset="vibrant-living-final-1.jpg"><span>final screen</span></div><div class="img-placeholder case-media" style="aspect-ratio:4 / 3" data-asset="vibrant-living-final-2.jpg"><span>final screen</span></div></div>
+        </div>
+      </section>
+      <section class="case-step" id="reflection">
+        <div class="case-step__label">
+          <span class="case-step__num">05</span>
+          <h2>Reflection</h2>
+        </div>
+        <div class="case-step__body">
+          <div class="copy-placeholder">[What did this project teach you? What would you do differently next time?]</div>
+          <div class="case-skills">
+            <h3>Skills I learned or stretched</h3>
+            <ul>
+              <li class="pill pill--pink ph-pill">[new skill]</li>
+              <li class="pill pill--olive ph-pill">[tool used]</li>
+              <li class="pill pill--gray ph-pill">[method tried]</li>
+            </ul>
+          </div>
+        </div>
+      </section>
       </div>
-    </div>
-
-    <div class="project-detail__gallery">
-      <div class="img-placeholder" data-asset="vibrant-living-gallery-1.jpg"><span>more visuals</span></div>
-      <div class="img-placeholder" data-asset="vibrant-living-gallery-2.jpg"><span>more visuals</span></div>
     </div>
 
     <nav class="project-nav" aria-label="Other projects">

@@ -117,3 +117,108 @@ document.querySelectorAll(".business-card").forEach((card) => {
     }
   });
 });
+
+// Config 2026 — floating swag drifts toward the cursor (same parallax as the hero)
+setupParallax(
+  document.querySelector(".config-hero"),
+  document.querySelectorAll(".config-float")
+);
+
+// Case-study pages — highlight the chapter currently on screen in the
+// sticky "On this page" list.
+const tocLinks = document.querySelectorAll(".case-toc a");
+if (tocLinks.length && "IntersectionObserver" in window) {
+  const byId = new Map([...tocLinks].map((a) => [a.getAttribute("href").slice(1), a]));
+  const tocObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        tocLinks.forEach((a) => a.classList.remove("is-active"));
+        byId.get(entry.target.id)?.classList.add("is-active");
+      });
+    },
+    { rootMargin: "-35% 0px -55% 0px" }
+  );
+  document.querySelectorAll(".case-step").forEach((step) => tocObserver.observe(step));
+}
+
+// Print Work — category filter
+const printButtons = document.querySelectorAll(".prints-filter__btn");
+printButtons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const filter = btn.dataset.filter;
+    printButtons.forEach((b) => {
+      const on = b === btn;
+      b.classList.toggle("is-active", on);
+      b.setAttribute("aria-pressed", String(on));
+    });
+    document.querySelectorAll(".print-card").forEach((card) => {
+      card.hidden = filter !== "all" && card.dataset.category !== filter;
+    });
+  });
+});
+
+// Art exhibition — click a framed piece to open "viewing mode";
+// arrows / keyboard step through every piece in the exhibition.
+const viewer = document.getElementById("exhibitViewer");
+if (viewer) {
+  const pieces = [...document.querySelectorAll(".exhibit-piece")];
+  const art = viewer.querySelector(".exhibit-viewer__art");
+  const titleEl = viewer.querySelector(".exhibit-viewer__title");
+  const metaEl = viewer.querySelector(".exhibit-viewer__meta");
+  let current = 0;
+  let opener = null;
+
+  const show = (i) => {
+    current = (i + pieces.length) % pieces.length;
+    const piece = pieces[current];
+    const frame = piece.querySelector(".exhibit-frame");
+    const content = frame.firstElementChild.cloneNode(true);
+    art.replaceChildren(content);
+    art.style.setProperty("--ar", frame.style.aspectRatio || "3 / 4");
+    titleEl.textContent = piece.dataset.title || "";
+    metaEl.textContent = piece.dataset.meta || "";
+  };
+  const open = (i, from) => {
+    opener = from;
+    show(i);
+    viewer.hidden = false;
+    document.body.style.overflow = "hidden";
+    viewer.querySelector(".exhibit-viewer__close").focus();
+  };
+  const close = () => {
+    viewer.hidden = true;
+    document.body.style.overflow = "";
+    opener?.focus();
+  };
+
+  pieces.forEach((piece, i) => {
+    const frame = piece.querySelector(".exhibit-frame");
+    frame.addEventListener("click", () => open(i, frame));
+  });
+  viewer.querySelector(".exhibit-viewer__close").addEventListener("click", close);
+  viewer.querySelector(".exhibit-viewer__nav--prev").addEventListener("click", () => show(current - 1));
+  viewer.querySelector(".exhibit-viewer__nav--next").addEventListener("click", () => show(current + 1));
+  viewer.addEventListener("click", (e) => { if (e.target === viewer) close(); });
+  document.addEventListener("keydown", (e) => {
+    if (viewer.hidden) return;
+    if (e.key === "Escape") close();
+    if (e.key === "ArrowLeft") show(current - 1);
+    if (e.key === "ArrowRight") show(current + 1);
+  });
+}
+
+// Config 2026 — stage clips play (muted) while on screen, pause when not
+const stageClips = document.querySelectorAll(".stage-clip");
+if (stageClips.length && "IntersectionObserver" in window && !prefersReducedMotion.matches) {
+  const clipObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) entry.target.play().catch(() => {});
+        else entry.target.pause();
+      });
+    },
+    { threshold: 0.5 }
+  );
+  stageClips.forEach((clip) => clipObserver.observe(clip));
+}

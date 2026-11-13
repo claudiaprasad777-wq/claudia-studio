@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>My Art Work — The Claudia Studio</title>
+<meta name="description" content="An exhibition of Claudia's sketches, paintings and personal pieces." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,600&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="exhibit-page">
+
+<div class="grid-bg" aria-hidden="true"></div>
+
+<header class="site-header">
+  <a href="index.html" class="logo" aria-label="The Claudia Studio — home">
+    <img class="logo-mark" src="assets/images/logo.svg" alt="The Claudia Studio" />
+  </a>
+
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="primaryNav">
+    <span></span><span></span><span></span>
+  </button>
+
+  <nav class="primary-nav" id="primaryNav">
+    <a href="index.html#home">Home</a>
+    <a href="work.html">Work</a>
+    <a href="art.html">My Art Work</a>
+    <a href="store.html">Store</a>
+    <a href="bio.html">Bio</a>
+    <a href="index.html#contact">Contact</a>
+  </nav>
+</header>
+
+<main>
+
+  <section class="exhibit">
+
+    <header class="exhibit-entrance">
+      <p class="exhibit-entrance__kicker">Now showing</p>
+      <h1 class="exhibit-entrance__title">My Art Work</h1>
+      <p class="exhibit-entrance__sub">A small exhibition of sketches, paintings &amp; personal pieces</p>
+      <div class="exhibit-entrance__statement copy-placeholder">[Artist statement — a few lines on what you make, what inspires you and the mediums you love.]</div>
+      <a href="#room-1" class="btn btn--dark">Enter the gallery &darr;</a>
+    </header>
+
+    <!-- Each room is a horizontally scrolling wall. To add a piece, copy one
+         <figure class="exhibit-piece"> and swap the placeholder for an <img>. -->
+    <section class="exhibit-room" id="room-1" aria-labelledby="room1Title">
+      <div class="exhibit-room__sign">
+        <span>Room I</span>
+        <h2 id="room1Title">Paintings</h2>
+      </div>
+      <div class="exhibit-wall" tabindex="0" aria-label="Paintings — scroll sideways">
+        <figure class="exhibit-piece" data-title="[Untitled I]" data-meta="[Acrylic on canvas · 2025]">
+          <button class="exhibit-frame" style="aspect-ratio:3/4"><span class="img-placeholder"><span>artwork</span></span></button>
+          <figcaption class="exhibit-placard"><strong>[Untitled I]</strong><span>[Acrylic on canvas · 2025]</span><span>[30 × 40 cm]</span></figcaption>
+        </figure>
+        <figure class="exhibit-piece" data-title="[Untitled II]" data-meta="[Watercolour · 2024]">
+          <button class="exhibit-frame" style="aspect-ratio:4/3"><span class="img-placeholder"><span>artwork</span></span></button>
+          <figcaption class="exhibit-placard"><strong>[Untitled II]</strong><span>[Watercolour · 2024]</span><span>[A4]</span></figcaption>
+        </figure>
+        <figure class="exhibit-piece" data-title="[Untitled III]" data-meta="[Oil pastel · 2024]">
+          <button class="exhibit-frame" style="aspect-ratio:1/1"><span class="img-placeholder"><span>artwork</span></span></button>
+          <figcaption class="exhibit-placard"><strong>[Untitled III]</strong><span>[Oil pastel · 2024]</span><span>[20 × 20 cm]</span></figcaption>
+        </figure>
+        <figure class="exhibit-piece" data-title="[Untitled IV]" data-meta="[Gouache · 2023]">
+          <button class="exhibit-frame" style="aspect-ratio:3/4"><span class="img-placeholder"><span>artwork</span></span></button>
+          <figcaption class="exhibit-placard"><strong>[Untitled IV]</strong><span>[Gouache · 2023]</span><span>[A3]</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="exhibit-room exhibit-room--alt" id="room-2" aria-labelledby="room2Title">
+      <div class="exhibit-room__sign">
+        <span>Room II</span>
+        <h2 id="room2Title">Sketchbook</h2>
+      </div>
+      <div class="exhibit-wall" tabindex="0" aria-label="Sketchbook — scroll sideways">
+        <figure class="exhibit-piece" data-title="[Sketch I]" data-meta="[Pencil · 2025]">
+          <button class="exhibit-frame exhibit-frame--light" style="aspect-ratio:4/3"><span class="img-placeholder"><span>sketch</span></span></button>
+          <figcaption class="exhibit-placard"><strong>[Sketch I]</strong><span>[Pencil · 2025]</span></figcaption>
+        </figure>
+        <figure class="exhibit-piece" data-title="[Sketch II]" data-meta="[Ink · 2025]">
+          <button class="exhibit-frame exhibit-frame--light" style="aspect-ratio:3/4"><span class="img-placeholder"><span>sketch</span></span></button>
+          <figcaption class="exhibit-placard"><strong>[Sketch II]</strong><span>[Ink · 2025]</span></figcaption>
+        </figure>
+        <figure class="exhibit-piece" data-title="[Sketch III]" data-meta="[Charcoal · 2024]">
+          <button class="exhibit-frame exhibit-frame--light" style="aspect-ratio:1/1"><span class="img-placeholder"><span>sketch</span></span></button>
+          <figcaption class="exhibit-placard"><strong>[Sketch III]</strong><span>[Charcoal · 2024]</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <footer class="exhibit-exit">
+      <p>Thanks for visiting the gallery.</p>
+      <a href="https://www.instagram.com/" class="btn btn--dark" target="_blank" rel="noopener">See more on Instagram &#8599;</a>
+    </footer>
+
+  </section>
+
+  <!-- viewing mode (lightbox) -->
+  <div class="exhibit-viewer" id="exhibitViewer" hidden role="dialog" aria-modal="true" aria-label="Artwork viewer">
+    <button class="exhibit-viewer__close" aria-label="Close">&times;</button>
+    <button class="exhibit-viewer__nav exhibit-viewer__nav--prev" aria-label="Previous piece">&larr;</button>
+    <figure class="exhibit-viewer__stage">
+      <div class="exhibit-viewer__art"></div>
+      <figcaption><strong class="exhibit-viewer__title"></strong><span class="exhibit-viewer__meta"></span></figcaption>
+    </figure>
+    <button class="exhibit-viewer__nav exhibit-viewer__nav--next" aria-label="Next piece">&rarr;</button>
+  </div>
+
+</main>
+
+<footer class="site-footer" id="contact">
+  <a href="index.html" class="logo logo--footer" aria-label="The Claudia Studio — home">
+    <img class="logo-mark" src="assets/images/logo.svg" alt="The Claudia Studio" />
+  </a>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

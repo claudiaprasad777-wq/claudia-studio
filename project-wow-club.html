@@ -26,7 +26,7 @@
   <nav class="primary-nav" id="primaryNav">
     <a href="index.html#home">Home</a>
     <a href="work.html">Work</a>
-    <a href="index.html#art-work">My Art Work</a>
+    <a href="art.html">My Art Work</a>
     <a href="store.html">Store</a>
     <a href="bio.html">Bio</a>
     <a href="index.html#contact">Contact</a>
@@ -35,30 +35,20 @@
 
 <main>
 
-  <article class="project-detail">
+  <article class="case">
 
     <a href="work.html" class="project-detail__back">&larr; Back to Work</a>
 
-    <div class="project-detail__header">
-      <h1 class="project-detail__title">Wow Club</h1>
-      <div class="project-detail__tags">
-              <span class="pill pill--pink">Visual Design</span>
-              <span class="pill pill--olive">User Experience</span>
-              <a class="project-detail__live" href="https://www.wowclub.com/" target="_blank" rel="noopener">Live &#8599;</a>
-      </div>
-    </div>
-
-    <img class="project-detail__cover" src="assets/images/projects/wow-club.png" alt="Wow Club project cover" />
-
-    <blockquote class="project-detail__quote">
-      &ldquo;Design can be art. Design can be aesthetics. Design is so simple, that’s why it is so complicated.&rdquo;
-      <cite>&ndash; Paul Rand</cite>
-    </blockquote>
-
-    <div class="project-detail__section">
-      <h2>Overview</h2>
-      <div class="project-detail__copy">
-        <p>
+    <header class="case-hero">
+      <p class="case-eyebrow">
+        <span class="ph-inline">[Project genre]</span>
+        <span class="case-eyebrow__slash" aria-hidden="true">/</span>
+        <span class="ph-inline">[Business / industry]</span>
+      </p>
+      <h1 class="case-title">Wow Club</h1>
+      <div class="case-description">
+        <div class="project-detail__copy">
+          <p>
           This project focused on creating a safe and welcoming travel
           platform for women. The platform enables women of different age
           groups to discover and book curated group trips, helping them
@@ -78,19 +68,72 @@
           and easy to use, while also encouraging friendship, community,
           self-discovery, and memorable travel experiences.
         </p>
+        </div>
       </div>
-    </div>
+      <div class="project-detail__tags case-tags">
+              <span class="pill pill--pink">Visual Design</span>
+              <span class="pill pill--olive">User Experience</span>
+              <a class="project-detail__live" href="https://www.wowclub.com/" target="_blank" rel="noopener">Live &#8599;</a>
+      </div>
+      <dl class="case-meta">
+        <div><dt>Role</dt><dd><span class="ph-inline">[your role]</span></dd></div>
+        <div><dt>Timeline</dt><dd><span class="ph-inline">[e.g. 6 weeks]</span></dd></div>
+        <div><dt>Tools</dt><dd><span class="ph-inline">[Figma, …]</span></dd></div>
+        <div><dt>Team</dt><dd><span class="ph-inline">[who you worked with]</span></dd></div>
+      </dl>
+    </header>
 
-    <div class="project-detail__section">
-      <h2>Process</h2>
-      <div class="project-detail__copy">
-        <p>
+    <img class="project-detail__cover case-cover" src="assets/images/projects/wow-club.png" alt="Wow Club project cover" />
+
+    <blockquote class="project-detail__quote">
+      &ldquo;Design can be art. Design can be aesthetics. Design is so simple, that’s why it is so complicated.&rdquo;
+      <cite>&ndash; Paul Rand</cite>
+    </blockquote>
+
+    <div class="case-body">
+      <nav class="case-toc" aria-label="On this page">
+        <ol>
+        <li><a href="#problem"><span class="case-toc__num">01</span>Problem</a></li>
+        <li><a href="#research"><span class="case-toc__num">02</span>Research</a></li>
+        <li><a href="#exploration"><span class="case-toc__num">03</span>Exploration</a></li>
+        <li><a href="#outcome"><span class="case-toc__num">04</span>Outcome</a></li>
+        <li><a href="#reflection"><span class="case-toc__num">05</span>Reflection</a></li>
+        </ol>
+      </nav>
+
+      <div class="case-steps">
+      <section class="case-step" id="problem">
+        <div class="case-step__label">
+          <span class="case-step__num">01</span>
+          <h2>Problem</h2>
+        </div>
+        <div class="case-step__body">
+          <div class="copy-placeholder">[What was broken, missing or needed? Who was affected, and what did the client or brief ask for?]</div>
+        </div>
+      </section>
+      <section class="case-step" id="research">
+        <div class="case-step__label">
+          <span class="case-step__num">02</span>
+          <h2>Research</h2>
+        </div>
+        <div class="case-step__body">
+          <div class="copy-placeholder">[How did you learn about the users and the space? Interviews, competitor audits, moodboards, data — and the key insights you found.]</div>
+          <div class="img-placeholder case-media" style="aspect-ratio:16 / 9" data-asset="wow-club-research.jpg"><span>research visual</span></div>
+        </div>
+      </section>
+      <section class="case-step" id="exploration">
+        <div class="case-step__label">
+          <span class="case-step__num">03</span>
+          <h2>Exploration</h2>
+        </div>
+        <div class="case-step__body">
+          <div class="project-detail__copy">
+            <p>
           This project was requested as a redesign/revamp of the site with
           a new, modern look. We explored a few different approaches and
           landed on this final design.
         </p>
-      </div>
-
+          </div>
       <div class="project-detail__before-after">
         <figure class="project-detail__before-after-item">
           <figcaption>Before</figcaption>
@@ -100,6 +143,37 @@
           <figcaption>After</figcaption>
           <img src="assets/images/projects/wow-club-after.jpg" alt="Wow Club homepage after the redesign" loading="lazy" />
         </figure>
+      </div>
+        </div>
+      </section>
+      <section class="case-step" id="outcome">
+        <div class="case-step__label">
+          <span class="case-step__num">04</span>
+          <h2>Outcome</h2>
+        </div>
+        <div class="case-step__body">
+          <div class="copy-placeholder">[The final design. What shipped, and what changed because of it (results, feedback, numbers)?]</div>
+          <div class="img-placeholder case-media" style="aspect-ratio:16 / 9" data-asset="wow-club-outcome.jpg"><span>outcome visual</span></div>
+          <div class="case-media-pair"><div class="img-placeholder case-media" style="aspect-ratio:4 / 3" data-asset="wow-club-final-1.jpg"><span>final screen</span></div><div class="img-placeholder case-media" style="aspect-ratio:4 / 3" data-asset="wow-club-final-2.jpg"><span>final screen</span></div></div>
+        </div>
+      </section>
+      <section class="case-step" id="reflection">
+        <div class="case-step__label">
+          <span class="case-step__num">05</span>
+          <h2>Reflection</h2>
+        </div>
+        <div class="case-step__body">
+          <div class="copy-placeholder">[What did this project teach you? What would you do differently next time?]</div>
+          <div class="case-skills">
+            <h3>Skills I learned or stretched</h3>
+            <ul>
+              <li class="pill pill--pink ph-pill">[new skill]</li>
+              <li class="pill pill--olive ph-pill">[tool used]</li>
+              <li class="pill pill--gray ph-pill">[method tried]</li>
+            </ul>
+          </div>
+        </div>
+      </section>
       </div>
     </div>
 

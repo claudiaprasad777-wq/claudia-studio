@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Print Work — The Claudia Studio</title>
+<meta name="description" content="Print design by Claudia — books, stickers, banners, posters and packaging." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,600&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<div class="grid-bg" aria-hidden="true"></div>
+
+<header class="site-header">
+  <a href="index.html" class="logo" aria-label="The Claudia Studio — home">
+    <img class="logo-mark" src="assets/images/logo.svg" alt="The Claudia Studio" />
+  </a>
+
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="primaryNav">
+    <span></span><span></span><span></span>
+  </button>
+
+  <nav class="primary-nav" id="primaryNav">
+    <a href="index.html#home">Home</a>
+    <a href="work.html">Work</a>
+    <a href="art.html">My Art Work</a>
+    <a href="store.html">Store</a>
+    <a href="bio.html">Bio</a>
+    <a href="index.html#contact">Contact</a>
+  </nav>
+</header>
+
+<main>
+
+  <section class="page-wrap prints">
+
+    <a href="work.html" class="project-detail__back">&larr; Back to Work</a>
+
+    <header class="page-intro">
+      <p class="case-eyebrow">Off the screen</p>
+      <h1 class="case-title">Print Work</h1>
+      <div class="case-description">
+        <div class="copy-placeholder">[A short intro about your print work — what you enjoy about designing for paper, and the kinds of things you've had printed.]</div>
+      </div>
+    </header>
+
+    <div class="prints-filter" role="toolbar" aria-label="Filter print work">
+      <button class="prints-filter__btn is-active" data-filter="all" aria-pressed="true">All</button>
+      <button class="prints-filter__btn" data-filter="books" aria-pressed="false">Books</button>
+      <button class="prints-filter__btn" data-filter="stickers" aria-pressed="false">Stickers</button>
+      <button class="prints-filter__btn" data-filter="banners" aria-pressed="false">Banners</button>
+      <button class="prints-filter__btn" data-filter="posters" aria-pressed="false">Posters</button>
+      <button class="prints-filter__btn" data-filter="packaging" aria-pressed="false">Packaging</button>
+    </div>
+
+    <ul class="prints-grid">
+      <li class="print-card" data-category="books">
+        <div class="img-placeholder print-card__img" style="aspect-ratio:3/4"><span>book cover</span></div>
+        <div class="print-card__info">
+          <span class="pill pill--pink">Book</span>
+          <h3>[Book title]</h3>
+          <dl class="print-specs">
+            <div><dt>Size</dt><dd>[A5]</dd></div>
+            <div><dt>Paper</dt><dd>[120gsm uncoated]</dd></div>
+            <div><dt>Finish</dt><dd>[Perfect bound, matte]</dd></div>
+          </dl>
+        </div>
+      </li>
+      <li class="print-card" data-category="stickers">
+        <div class="img-placeholder print-card__img" style="aspect-ratio:1/1"><span>sticker sheet</span></div>
+        <div class="print-card__info">
+          <span class="pill pill--olive">Stickers</span>
+          <h3>[Sticker set name]</h3>
+          <dl class="print-specs">
+            <div><dt>Size</dt><dd>[5 × 5 cm]</dd></div>
+            <div><dt>Material</dt><dd>[Vinyl]</dd></div>
+            <div><dt>Finish</dt><dd>[Die-cut, glossy]</dd></div>
+          </dl>
+        </div>
+      </li>
+      <li class="print-card" data-category="banners">
+        <div class="img-placeholder print-card__img" style="aspect-ratio:3/2"><span>banner photo</span></div>
+        <div class="print-card__info">
+          <span class="pill pill--blue">Banner</span>
+          <h3>[Banner / event name]</h3>
+          <dl class="print-specs">
+            <div><dt>Size</dt><dd>[3 × 6 ft]</dd></div>
+            <div><dt>Material</dt><dd>[Flex]</dd></div>
+            <div><dt>Use</dt><dd>[Event backdrop]</dd></div>
+          </dl>
+        </div>
+      </li>
+      <li class="print-card" data-category="posters">
+        <div class="img-placeholder print-card__img" style="aspect-ratio:2/3"><span>poster</span></div>
+        <div class="print-card__info">
+          <span class="pill pill--gray">Poster</span>
+          <h3>[Poster title]</h3>
+          <dl class="print-specs">
+            <div><dt>Size</dt><dd>[A3]</dd></div>
+            <div><dt>Paper</dt><dd>[170gsm silk]</dd></div>
+            <div><dt>Print</dt><dd>[Digital / Riso]</dd></div>
+          </dl>
+        </div>
+      </li>
+      <li class="print-card" data-category="packaging">
+        <div class="img-placeholder print-card__img" style="aspect-ratio:4/3"><span>packaging</span></div>
+        <div class="print-card__info">
+          <span class="pill pill--pink">Packaging</span>
+          <h3>[Product name]</h3>
+          <dl class="print-specs">
+            <div><dt>Format</dt><dd>[Box / label]</dd></div>
+            <div><dt>Material</dt><dd>[Kraft board]</dd></div>
+            <div><dt>Finish</dt><dd>[Foil stamp]</dd></div>
+          </dl>
+        </div>
+      </li>
+      <li class="print-card" data-category="books">
+        <div class="img-placeholder print-card__img" style="aspect-ratio:4/3"><span>book spread</span></div>
+        <div class="print-card__info">
+          <span class="pill pill--pink">Book</span>
+          <h3>[Zine / booklet title]</h3>
+          <dl class="print-specs">
+            <div><dt>Size</dt><dd>[A6]</dd></div>
+            <div><dt>Paper</dt><dd>[Recycled]</dd></div>
+            <div><dt>Finish</dt><dd>[Saddle stitched]</dd></div>
+          </dl>
+        </div>
+      </li>
+    </ul>
+
+    <section class="print-process" aria-labelledby="printProcessTitle">
+      <h2 id="printProcessTitle">From file to paper</h2>
+      <ol class="print-process__steps">
+        <li><span class="case-step__num">01</span><strong>Design</strong><span class="copy-placeholder">[How you set up files: bleed, CMYK, fonts.]</span></li>
+        <li><span class="case-step__num">02</span><strong>Proof</strong><span class="copy-placeholder">[Test prints, colour checks, paper samples.]</span></li>
+        <li><span class="case-step__num">03</span><strong>Print</strong><span class="copy-placeholder">[Which printer / method, and why.]</span></li>
+        <li><span class="case-step__num">04</span><strong>In hand</strong><span class="copy-placeholder">[What it felt like holding the final piece.]</span></li>
+      </ol>
+    </section>
+
+  </section>
+
+</main>
+
+<footer class="site-footer" id="contact">
+  <a href="index.html" class="logo logo--footer" aria-label="The Claudia Studio — home">
+    <img class="logo-mark" src="assets/images/logo.svg" alt="The Claudia Studio" />
+  </a>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
