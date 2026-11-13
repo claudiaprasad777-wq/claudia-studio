@@ -1837,7 +1837,7 @@ h1, h2, h3 { margin: 0; }
 /* ==========================================================================
    Art exhibition page
    ========================================================================== */
-.exhibit-page { --wall: #f3eee6; --wall-alt: #e9edf0; --frame: #2a2420; }
+.exhibit, .exhibit-viewer { --wall: #f3eee6; --wall-alt: #e9edf0; --frame: #2a2420; }
 
 .exhibit-entrance {
   max-width: 760px;

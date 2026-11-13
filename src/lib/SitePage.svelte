@@ -95,10 +95,111 @@
       card.addEventListener('keydown', keyFlipCard);
     });
 
+    // Config 2026 — floating photos drift toward the cursor
+    const teardownConfigParallax = setupParallax(
+      document.querySelector('.config-hero'),
+      document.querySelectorAll('.config-float')
+    );
+
+    // Case-study pages — highlight the chapter on screen in the sticky list
+    let tocObserver;
+    const tocLinks = document.querySelectorAll('.case-toc a');
+    if (tocLinks.length && 'IntersectionObserver' in window) {
+      const byId = new Map([...tocLinks].map((a) => [a.getAttribute('href').slice(1), a]));
+      tocObserver = new IntersectionObserver((entries) => entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        tocLinks.forEach((a) => a.classList.remove('is-active'));
+        byId.get(entry.target.id)?.classList.add('is-active');
+      }), { rootMargin: '-35% 0px -55% 0px' });
+      document.querySelectorAll('.case-step').forEach((step) => tocObserver.observe(step));
+    }
+
+    // Print Work — category filter
+    const printButtons = document.querySelectorAll('.prints-filter__btn');
+    const filterPrints = (event) => {
+      const btn = event.currentTarget;
+      const filter = btn.dataset.filter;
+      printButtons.forEach((b) => {
+        b.classList.toggle('is-active', b === btn);
+        b.setAttribute('aria-pressed', String(b === btn));
+      });
+      document.querySelectorAll('.print-card').forEach((card) => {
+        card.hidden = filter !== 'all' && card.dataset.category !== filter;
+      });
+    };
+    printButtons.forEach((btn) => btn.addEventListener('click', filterPrints));
+
+    // Config 2026 — stage clips play muted while on screen
+    let clipObserver;
+    const stageClips = document.querySelectorAll('.stage-clip');
+    if (stageClips.length && 'IntersectionObserver' in window && !reducedMotion.matches) {
+      clipObserver = new IntersectionObserver((entries) => entries.forEach((entry) => {
+        if (entry.isIntersecting) entry.target.play().catch(() => {});
+        else entry.target.pause();
+      }), { threshold: 0.5 });
+      stageClips.forEach((clip) => clipObserver.observe(clip));
+    }
+
+    // Art exhibition — click a frame for viewing mode; arrows/Esc to navigate
+    const viewer = document.getElementById('exhibitViewer');
+    const viewerCleanup = [];
+    if (viewer) {
+      const pieces = [...document.querySelectorAll('.exhibit-piece')];
+      const art = viewer.querySelector('.exhibit-viewer__art');
+      const titleEl = viewer.querySelector('.exhibit-viewer__title');
+      const metaEl = viewer.querySelector('.exhibit-viewer__meta');
+      let current = 0;
+      let opener = null;
+      const show = (i) => {
+        current = (i + pieces.length) % pieces.length;
+        const piece = pieces[current];
+        const frame = piece.querySelector('.exhibit-frame');
+        art.replaceChildren(frame.firstElementChild.cloneNode(true));
+        art.style.setProperty('--ar', frame.style.aspectRatio || '3 / 4');
+        titleEl.textContent = piece.dataset.title || '';
+        metaEl.textContent = piece.dataset.meta || '';
+      };
+      const close = () => {
+        viewer.hidden = true;
+        document.body.style.overflow = '';
+        opener?.focus();
+      };
+      const on = (el, type, fn) => {
+        el.addEventListener(type, fn);
+        viewerCleanup.push(() => el.removeEventListener(type, fn));
+      };
+      pieces.forEach((piece, i) => {
+        const frame = piece.querySelector('.exhibit-frame');
+        on(frame, 'click', () => {
+          opener = frame;
+          show(i);
+          viewer.hidden = false;
+          document.body.style.overflow = 'hidden';
+          viewer.querySelector('.exhibit-viewer__close').focus();
+        });
+      });
+      on(viewer.querySelector('.exhibit-viewer__close'), 'click', close);
+      on(viewer.querySelector('.exhibit-viewer__nav--prev'), 'click', () => show(current - 1));
+      on(viewer.querySelector('.exhibit-viewer__nav--next'), 'click', () => show(current + 1));
+      on(viewer, 'click', (e) => { if (e.target === viewer) close(); });
+      on(document, 'keydown', (e) => {
+        if (viewer.hidden) return;
+        if (e.key === 'Escape') close();
+        if (e.key === 'ArrowLeft') show(current - 1);
+        if (e.key === 'ArrowRight') show(current + 1);
+      });
+      viewerCleanup.push(() => { document.body.style.overflow = ''; });
+    }
+
     return () => {
       navToggle?.removeEventListener('click', toggleNav);
       teardownHeroParallax();
       teardownBioParallax();
+      teardownConfigParallax();
+      tocObserver?.disconnect();
+      clipObserver?.disconnect();
+      printButtons.forEach((btn) => btn.removeEventListener('click', filterPrints));
+      viewerCleanup.forEach((fn) => fn());
       observer?.disconnect();
       businessCards.forEach((card) => {
         card.removeEventListener('click', flipCard);

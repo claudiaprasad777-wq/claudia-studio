@@ -21,6 +21,13 @@ import logoGoodHealthPhysicians from '../../logo-good-health-physicians.html?raw
 import logoHyperKart from '../../logo-hyper-kart.html?raw';
 import logoMylimb from '../../logo-mylimb.html?raw';
 import logoThoughtfulRobots from '../../logo-thoughtful-robots.html?raw';
+import art from '../../art.html?raw';
+import prints from '../../prints.html?raw';
+import config2026 from '../../config-2026.html?raw';
+import projectFreelance1 from '../../project-freelance-1.html?raw';
+import projectFreelance2 from '../../project-freelance-2.html?raw';
+import projectCompetition1 from '../../project-competition-1.html?raw';
+import projectCompetition2 from '../../project-competition-2.html?raw';
 
 function toPage(html, titleFallback) {
   const title = html.match(/<title>([\s\S]*?)<\/title>/i)?.[1] ?? titleFallback;
@@ -31,11 +38,12 @@ function toPage(html, titleFallback) {
       .replace(/<script[^>]*src=["']js\/main\.js["'][^>]*><\/script>/gi, '')
       .replaceAll('src="assets/', 'src="/assets/')
       .replaceAll("src='assets/", "src='/assets/")
+      .replaceAll('poster="assets/', 'poster="/assets/')
       .replaceAll('href="assets/', 'href="/assets/')
       .replaceAll("href='assets/", "href='/assets/")
       .replaceAll('href="index.html', 'href="/')
       .replaceAll("href='index.html", "href='/")
-      .replace(/href=(["'])((?:project|logo)-[a-z0-9-]+|work|bio|store)\.html/g, 'href=$1/$2')
+      .replace(/href=(["'])((?:project|logo)-[a-z0-9-]+|work|bio|store|art|prints|config-2026)\.html/g, 'href=$1/$2')
   };
 }
 
@@ -58,5 +66,12 @@ export const pages = Object.fromEntries(Object.entries({
   'logo-good-health-physicians': logoGoodHealthPhysicians,
   'logo-hyper-kart': logoHyperKart,
   'logo-mylimb': logoMylimb,
-  'logo-thoughtful-robots': logoThoughtfulRobots
+  'logo-thoughtful-robots': logoThoughtfulRobots,
+  art,
+  prints,
+  'config-2026': config2026,
+  'project-freelance-1': projectFreelance1,
+  'project-freelance-2': projectFreelance2,
+  'project-competition-1': projectCompetition1,
+  'project-competition-2': projectCompetition2
 }).map(([key, value]) => [key, toPage(value, key)]));
