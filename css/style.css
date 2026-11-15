@@ -1765,6 +1765,8 @@ h1, h2, h3 { margin: 0; }
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 26px;
+  max-width: 640px;
+  margin-inline: auto;
 }
 .swag-item {
   display: grid;
