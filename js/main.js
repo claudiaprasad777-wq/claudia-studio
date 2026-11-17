@@ -252,7 +252,7 @@ if (stageClips.length && "IntersectionObserver" in window && !prefersReducedMoti
           const n = counts.get(el.parentElement) || 0;
           counts.set(el.parentElement, n + 1);
           el.style.setProperty('--i', Math.min(n, 6));
-          el.classList.add('reveal');
+          el.classList.add('pop-in');
           revealObserver.observe(el);
         });
         cleanups.push(() => revealObserver.disconnect());
@@ -331,6 +331,146 @@ if (stageClips.length && "IntersectionObserver" in window && !prefersReducedMoti
         bar.remove();
       };
     }
+
+    // Homepage banner — grid squares light up as pixel trails under the cursor
+    // and grid lines darken nearby (never behind the middle content)
+    const setupPixelGrid = () => {
+      const hero = document.querySelector('.hero');
+      if (!hero || reducedMotion.matches || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return () => {};
+      const CELL = 40; // matches .grid-bg background-size
+      const colors = ['#1e1e1e', '#555555', '#8a8a8a', '#bdbdbd', '#e2e2e2', '#ffffff'];
+      const glyphs = 'CLAUDIA*+#=~:.';
+      const canvas = document.createElement('canvas');
+      canvas.className = 'pixel-grid';
+      canvas.setAttribute('aria-hidden', 'true');
+      document.body.prepend(canvas);
+      const ctx = canvas.getContext('2d');
+      const cells = new Map(); // "col,row" -> { life, color, glyph }
+      // keep the middle content (title, intro, button) completely still and clear
+      const calmZones = [...hero.querySelectorAll('.hero-heading, .hero-copy')];
+      let calmRects = [];
+      const updateCalm = () => {
+        calmRects = calmZones.map((el) => {
+          const b = el.getBoundingClientRect();
+          return { l: b.left - 12, t: b.top - 12, r: b.right + 12, b: b.bottom + 12 };
+        });
+      };
+      const inCalm = (x, y, w = 0, h = 0) => calmRects.some((z) => x < z.r && x + w > z.l && y < z.b && y + h > z.t);
+      let pointer = null;
+      let raf = 0;
+      let last = performance.now();
+      let dpr = 1;
+
+      const resize = () => {
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = window.innerWidth * dpr;
+        canvas.height = window.innerHeight * dpr;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      };
+      resize();
+
+      const light = (col, row, strength) => {
+        if (inCalm(col * CELL, row * CELL, CELL, CELL)) return;
+        const key = `${col},${row}`;
+        const cell = cells.get(key);
+        if (cell) { cell.life = Math.max(cell.life, strength); return; }
+        cells.set(key, {
+          life: strength,
+          age: 0,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          glyph: glyphs[Math.floor(Math.random() * glyphs.length)],
+        });
+      };
+
+      const frame = (now) => {
+        const dt = Math.min(0.05, (now - last) / 1000);
+        last = now;
+        ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+        // darker grid lines in a soft circle around the cursor
+        if (pointer) {
+          const r = 150;
+          const g = ctx.createRadialGradient(pointer.x, pointer.y, 0, pointer.x, pointer.y, r);
+          g.addColorStop(0, 'rgba(30,30,30,0.14)');
+          g.addColorStop(1, 'rgba(30,30,30,0)');
+          ctx.strokeStyle = g;
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          const x0 = Math.floor((pointer.x - r) / CELL) * CELL;
+          const y0 = Math.floor((pointer.y - r) / CELL) * CELL;
+          for (let x = x0; x <= pointer.x + r; x += CELL) { ctx.moveTo(x + 0.5, pointer.y - r); ctx.lineTo(x + 0.5, pointer.y + r); }
+          for (let y = y0; y <= pointer.y + r; y += CELL) { ctx.moveTo(pointer.x - r, y + 0.5); ctx.lineTo(pointer.x + r, y + 0.5); }
+          ctx.stroke();
+          calmRects.forEach((z) => ctx.clearRect(z.l, z.t, z.r - z.l, z.b - z.t));
+        }
+
+        // fading pixel squares with a tiny glyph inside
+        ctx.font = '400 11px "Space Mono", monospace';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        cells.forEach((cell, key) => {
+          cell.life -= dt / 1.8;
+          cell.age += dt;
+          if (cell.life <= 0) { cells.delete(key); return; }
+          const [col, row] = key.split(',').map(Number);
+          const x = col * CELL;
+          const y = row * CELL;
+          // ease in over a quarter second, then fade out slowly
+          const fadeIn = Math.min(1, cell.age / 0.25);
+          const strength = fadeIn * fadeIn * (3 - 2 * fadeIn) * Math.min(1, cell.life * 1.4);
+          const dark = /^#(1e|55)/.test(cell.color);
+          const pad = 5 + (1 - strength) * 5;
+          ctx.globalAlpha = strength * (dark ? 0.18 : 0.55);
+          ctx.fillStyle = cell.color;
+          ctx.fillRect(x + pad, y + pad, CELL - pad * 2, CELL - pad * 2);
+          if (cell.color === '#ffffff') {
+            ctx.globalAlpha = strength * 0.25;
+            ctx.strokeStyle = '#1e1e1e';
+            ctx.strokeRect(x + pad + 0.5, y + pad + 0.5, CELL - pad * 2 - 1, CELL - pad * 2 - 1);
+          }
+          ctx.globalAlpha = strength * 0.3;
+          ctx.fillStyle = '#1e1e1e';
+          ctx.fillText(cell.glyph, x + CELL / 2, y + CELL / 2 + 1);
+        });
+        ctx.globalAlpha = 1;
+
+        raf = cells.size || pointer ? requestAnimationFrame(frame) : 0;
+      };
+      const wake = () => {
+        if (!raf) { last = performance.now(); raf = requestAnimationFrame(frame); }
+      };
+
+      const move = (e) => {
+        const prev = pointer;
+        pointer = { x: e.clientX, y: e.clientY };
+        updateCalm();
+        const col = Math.floor(pointer.x / CELL);
+        const row = Math.floor(pointer.y / CELL);
+        light(col, row, 1);
+        // a few scattered neighbours so the trail looks like a pixel creature
+        const speed = prev ? Math.hypot(pointer.x - prev.x, pointer.y - prev.y) : 0;
+        const extra = Math.min(2, Math.floor(speed / 40));
+        for (let i = 0; i < extra; i += 1) {
+          light(col + Math.round((Math.random() - 0.5) * 2.4), row + Math.round((Math.random() - 0.5) * 2.4), 0.45 + Math.random() * 0.3);
+        }
+        wake();
+      };
+      const leave = () => {
+        pointer = null;
+      };
+
+      hero.addEventListener('pointermove', move);
+      hero.addEventListener('pointerleave', leave);
+      window.addEventListener('resize', resize);
+      return () => {
+        cancelAnimationFrame(raf);
+        hero.removeEventListener('pointermove', move);
+        hero.removeEventListener('pointerleave', leave);
+        window.removeEventListener('resize', resize);
+        canvas.remove();
+      };
+    };
+    const teardownPixelGrid = setupPixelGrid();
 
     const teardownFun = setupFun();
 
