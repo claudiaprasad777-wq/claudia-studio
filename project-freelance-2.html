@@ -35,33 +35,42 @@
 
 <main>
 
-  <article class="case">
+  <article class="case" style="--accent:var(--olive);--accent-ink:var(--olive-ink)">
 
     <a href="work.html#freelance" class="project-detail__back">&larr; Back to Work</a>
 
     <header class="case-hero">
-      <p class="case-eyebrow">
-        <span class="ph-inline">[Project genre]</span>
-        <span class="case-eyebrow__slash" aria-hidden="true">/</span>
-        <span class="ph-inline">[Client / competition]</span>
-      </p>
-      <h1 class="case-title">Freelance Project Two</h1>
-      <div class="case-description">
-        <div class="copy-placeholder">[Two or three sentences: what this project is, who it's for, and what you designed.]</div>
+      <div class="case-hero__main">
+        <p class="case-eyebrow">
+          <span class="ph-inline">[Project genre]</span>
+          <span class="case-eyebrow__slash" aria-hidden="true">/</span>
+          <span class="ph-inline">[Client / competition]</span>
+        </p>
+        <h1 class="case-title">Freelance Project Two</h1>
+        <div class="case-description">
+          <div class="copy-placeholder">[Two or three sentences: what this project is, who it's for, and what you designed.]</div>
+        </div>
+        <div class="project-detail__tags case-tags">
+                <span class="pill pill--blue">Freelance</span>
+                <span class="pill pill--gray ph-pill">[discipline]</span>
+        </div>
       </div>
-      <div class="project-detail__tags case-tags">
-              <span class="pill pill--blue">Freelance</span>
-              <span class="pill pill--gray ph-pill">[discipline]</span>
-      </div>
-      <dl class="case-meta">
+      <aside class="case-ticket" aria-label="At a glance">
+        <p class="case-ticket__title">At a glance</p>
+        <dl class="case-meta">
         <div><dt>Role</dt><dd><span class="ph-inline">[your role]</span></dd></div>
         <div><dt>Client</dt><dd><span class="ph-inline">[client name]</span></dd></div>
         <div><dt>Timeline</dt><dd><span class="ph-inline">[e.g. 3 weeks]</span></dd></div>
         <div><dt>Tools</dt><dd><span class="ph-inline">[Figma, …]</span></dd></div>
       </dl>
+      </aside>
     </header>
-
-    <div class="img-placeholder case-cover case-cover--ph" style="aspect-ratio:2519 / 1227" data-asset="freelance-2-cover.jpg"><span>cover image</span></div>
+    <div class="case-stage">
+      <figure class="case-window">
+        <div class="case-window__bar" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="img-placeholder case-cover case-cover--ph" style="aspect-ratio:2519 / 1227" data-asset="freelance-2-cover.jpg"><span>cover image</span></div>
+      </figure>
+    </div>
 
     <blockquote class="project-detail__quote">
       &ldquo;[A quote that sets the mood for this project]&rdquo;
@@ -80,13 +89,15 @@
       </nav>
 
       <div class="case-steps">
-      <section class="case-step" id="problem">
+      <section class="case-step case-step--split" id="problem">
         <div class="case-step__label">
           <span class="case-step__num">01</span>
           <h2>Problem</h2>
         </div>
         <div class="case-step__body">
           <div class="copy-placeholder">[What was broken, missing or needed? Who was affected, and what did the client or brief ask for?]</div>
+        
+          <p class="case-hmw"><span class="case-hmw__label">How might we&hellip;</span><span class="ph-inline">[reframe the problem as a question]</span>?</p>
         </div>
       </section>
       <section class="case-step" id="research">
@@ -96,6 +107,11 @@
         </div>
         <div class="case-step__body">
           <div class="copy-placeholder">[How did you learn about the users and the space? Interviews, competitor audits, moodboards, data — and the key insights you found.]</div>
+          <ul class="case-insights">
+            <li class="case-insight"><span class="case-insight__num">Insight 01</span><span class="ph-inline">[what you found]</span></li>
+            <li class="case-insight"><span class="case-insight__num">Insight 02</span><span class="ph-inline">[what you found]</span></li>
+            <li class="case-insight"><span class="case-insight__num">Insight 03</span><span class="ph-inline">[what you found]</span></li>
+          </ul>
           <div class="img-placeholder case-media" style="aspect-ratio:16 / 9" data-asset="freelance-2-research.jpg"><span>research visual</span></div>
         </div>
       </section>
@@ -106,27 +122,38 @@
         </div>
         <div class="case-step__body">
           <div class="copy-placeholder">[Sketches, wireframes, directions you tried and dropped. Why did the chosen direction win?]</div>
-          <div class="img-placeholder case-media" style="aspect-ratio:16 / 9" data-asset="freelance-2-exploration.jpg"><span>exploration visual</span></div>
+          <div class="case-film" tabindex="0" aria-label="Exploration — scroll sideways">
+            <figure class="case-film__frame"><div class="img-placeholder"><span>sketches</span></div><figcaption class="ph-inline">[sketches]</figcaption></figure>
+            <figure class="case-film__frame"><div class="img-placeholder"><span>wireframes</span></div><figcaption class="ph-inline">[wireframes]</figcaption></figure>
+            <figure class="case-film__frame"><div class="img-placeholder"><span>direction A</span></div><figcaption class="ph-inline">[direction A]</figcaption></figure>
+            <figure class="case-film__frame case-film__frame--chosen"><div class="img-placeholder"><span>direction B</span></div><figcaption class="ph-inline">[direction B]</figcaption></figure>
+          </div>
         </div>
       </section>
-      <section class="case-step" id="outcome">
+      <section class="case-step case-step--band" id="outcome">
         <div class="case-step__label">
           <span class="case-step__num">04</span>
           <h2>Outcome</h2>
         </div>
         <div class="case-step__body">
           <div class="copy-placeholder">[The final design. What shipped, and what changed because of it (results, feedback, numbers)?]</div>
-          <div class="img-placeholder case-media" style="aspect-ratio:16 / 9" data-asset="freelance-2-outcome.jpg"><span>outcome visual</span></div>
-          <div class="case-media-pair"><div class="img-placeholder case-media" style="aspect-ratio:4 / 3" data-asset="freelance-2-final-1.jpg"><span>final screen</span></div><div class="img-placeholder case-media" style="aspect-ratio:4 / 3" data-asset="freelance-2-final-2.jpg"><span>final screen</span></div></div>
+          <div class="case-bento"><div class="img-placeholder case-media" style="aspect-ratio:16 / 9" data-asset="freelance-2-outcome.jpg"><span>outcome visual</span></div><div class="img-placeholder case-media" style="aspect-ratio:4 / 3" data-asset="freelance-2-final-1.jpg"><span>final screen</span></div><div class="img-placeholder case-media" style="aspect-ratio:4 / 3" data-asset="freelance-2-final-2.jpg"><span>final screen</span></div></div>
+        
+          <ul class="case-results">
+            <li><strong class="ph-inline">[+00%]</strong><span class="ph-inline">[what improved]</span></li>
+            <li><strong class="ph-inline">[+00%]</strong><span class="ph-inline">[what improved]</span></li>
+            <li><strong class="ph-inline">[+00%]</strong><span class="ph-inline">[what improved]</span></li>
+          </ul>
         </div>
       </section>
-      <section class="case-step" id="reflection">
+      <section class="case-step case-step--note" id="reflection">
         <div class="case-step__label">
           <span class="case-step__num">05</span>
           <h2>Reflection</h2>
         </div>
         <div class="case-step__body">
           <div class="copy-placeholder">[What did this project teach you? What would you do differently next time?]</div>
+          <p class="case-nexttime"><strong>Next time I&rsquo;d&hellip;</strong> <span class="ph-inline">[one thing you&rsquo;d do differently]</span></p>
           <div class="case-skills">
             <h3>Skills I learned or stretched</h3>
             <ul>
@@ -145,9 +172,9 @@
         <span class="project-nav__label">&larr; Previous</span>
         <span>Freelance Project One</span>
       </a>
-      <a href="project-competition-1.html" class="project-nav__next">
-        <span class="project-nav__label">Next &rarr;</span>
-        <span>Competition Entry One</span>
+      <a href="project-competition-1.html" class="case-next">
+        <span class="case-next__text"><span class="case-next__label">Up next &rarr;</span><strong>Competition Entry One</strong></span>
+        <span class="case-next__pic"><span class="img-placeholder"><span>cover</span></span></span>
       </a>
     </nav>
 

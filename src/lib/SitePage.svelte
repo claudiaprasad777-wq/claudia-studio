@@ -191,7 +191,117 @@
       viewerCleanup.push(() => { document.body.style.overflow = ''; });
     }
 
+    // Fun bits — scroll reveal, card tilt, click sparkles
+    const setupFun = () => {
+      const cleanups = [];
+      if (reducedMotion.matches) return () => {};
+
+      // 1. pop things in as they scroll into view (staggered per group)
+      if ('IntersectionObserver' in window) {
+        const revealTargets = document.querySelectorAll([
+          '.section-heading', '.case-step', '.case-cover', '.print-card', '.print-process__steps li',
+          '.swag-item', '.config-photo', '.stage-clip', '.takeaway', '.config-section__title',
+          '.logo-tile', '.logo-detail__tiles', '.logo-detail__wide', '.logo-detail__system',
+          '.bio-block__title', '.now-note', '.timeline__item', '.bio-card', '.off-polaroid',
+          '.work-group-title', '.work-more__tile', '.exhibit-room__sign', '.config-teaser__card',
+          '.projects.work-archive .project-card', '.case-insight', '.case-hmw', '.case-film', '.case-results li', '.case-ticket', '.case-window', '.case-next'
+        ].join(','));
+        const counts = new Map();
+        const revealObserver = new IntersectionObserver((entries) => entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        }), { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        revealTargets.forEach((el) => {
+          if (el.closest('.hero') || el.classList.contains('scroll-blur')) return;
+          const n = counts.get(el.parentElement) || 0;
+          counts.set(el.parentElement, n + 1);
+          el.style.setProperty('--i', Math.min(n, 6));
+          el.classList.add('reveal');
+          revealObserver.observe(el);
+        });
+        cleanups.push(() => revealObserver.disconnect());
+      }
+
+      // 2. cards tilt toward the cursor
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        document.querySelectorAll('.print-card, .work-more__tile, .bio-card, .logo-detail__tile').forEach((card) => {
+          card.classList.add('tilt');
+          const move = (e) => {
+            const b = card.getBoundingClientRect();
+            const x = (e.clientX - b.left) / b.width - 0.5;
+            const y = (e.clientY - b.top) / b.height - 0.5;
+            card.classList.add('is-tilting');
+            card.style.transform = `perspective(800px) rotateX(${(-y * 8).toFixed(2)}deg) rotateY(${(x * 10).toFixed(2)}deg) translateY(-4px)`;
+          };
+          const leave = () => {
+            card.classList.remove('is-tilting');
+            card.style.transform = '';
+          };
+          card.addEventListener('pointermove', move);
+          card.addEventListener('pointerleave', leave);
+          cleanups.push(() => {
+            card.removeEventListener('pointermove', move);
+            card.removeEventListener('pointerleave', leave);
+          });
+        });
+      }
+
+      // 3. little confetti sparkles on playful clicks
+      const sparkColors = ['#b3455f', '#6b6f2f', '#2f6280', '#f7d7de', '#e4e7c3', '#d3e4f0'];
+      const sparkle = (e) => {
+        if (!e.target.closest('.btn, .pill, .prints-filter__btn, .now-note, .logo-swatch, .off-polaroid')) return;
+        for (let i = 0; i < 10; i += 1) {
+          const dot = document.createElement('span');
+          const angle = (Math.PI * 2 * i) / 10 + Math.random() * 0.4;
+          const dist = 28 + Math.random() * 26;
+          dot.className = 'click-spark';
+          dot.style.left = `${e.clientX}px`;
+          dot.style.top = `${e.clientY}px`;
+          dot.style.setProperty('--dx', `${Math.cos(angle) * dist}px`);
+          dot.style.setProperty('--dy', `${Math.sin(angle) * dist}px`);
+          dot.style.setProperty('--spark', sparkColors[i % sparkColors.length]);
+          dot.addEventListener('animationend', () => dot.remove(), { once: true });
+          document.body.appendChild(dot);
+        }
+      };
+      document.addEventListener('click', sparkle);
+      cleanups.push(() => document.removeEventListener('click', sparkle));
+
+      return () => cleanups.forEach((fn) => fn());
+    };
+    // Project pages — reading progress bar in the project's accent colour
+    const caseArticle = document.querySelector('article.case');
+    let teardownProgress = () => {};
+    if (caseArticle) {
+      const bar = document.createElement('div');
+      bar.className = 'case-progress';
+      bar.setAttribute('aria-hidden', 'true');
+      caseArticle.prepend(bar);
+      let queued = false;
+      const update = () => {
+        queued = false;
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        bar.style.setProperty('--p', max > 0 ? Math.min(1, window.scrollY / max) : 0);
+      };
+      const onScroll = () => {
+        if (!queued) { queued = true; requestAnimationFrame(update); }
+      };
+      update();
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll);
+      teardownProgress = () => {
+        window.removeEventListener('scroll', onScroll);
+        window.removeEventListener('resize', onScroll);
+        bar.remove();
+      };
+    }
+
+    const teardownFun = setupFun();
+
     return () => {
+      teardownFun();
+      teardownProgress();
       navToggle?.removeEventListener('click', toggleNav);
       teardownHeroParallax();
       teardownBioParallax();
